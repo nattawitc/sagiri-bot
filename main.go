@@ -20,7 +20,7 @@ import (
 func main() {
 	token := viper.GetString("token")
 	if token == "" {
-		fmt.Println("No token provided. Please run: airhorn -t <bot token>")
+		fmt.Println("No token provided.")
 		return
 	}
 

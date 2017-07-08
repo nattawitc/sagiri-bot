@@ -26,7 +26,7 @@ func init() {
 }
 
 func loadTemplate() {
-	f, err := os.Open("event/messagecreate/slam/template.png")
+	f, err := os.Open("resource/slam_template.png")
 	if err != nil {
 		panic(err)
 	}
