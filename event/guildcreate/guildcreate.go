@@ -18,7 +18,6 @@ func GuildCreate(s *discordgo.Session, event *discordgo.GuildCreate) {
 		guildState[presence.User.ID] = &globalstate.MemberState{
 			Status: presence.Status,
 		}
-		//fmt.Println(presence.User.ID)
 	}
 	// Store Member data
 	for _, member := range event.Members {
@@ -29,7 +28,5 @@ func GuildCreate(s *discordgo.Session, event *discordgo.GuildCreate) {
 		}
 		guildState[member.User.ID].Name = member.User.Username
 	}
-	//data, _ := json.Marshal(guildState)
-	//fmt.Println(string(data))
 	globalstate.MemberStates[event.ID] = guildState
 }

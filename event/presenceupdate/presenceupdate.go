@@ -1,9 +1,8 @@
 package presenceupdate
 
 import (
-	"fmt"
-
 	"sagiri-bot/globalstate"
+	"sagiri-bot/logger"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -17,7 +16,7 @@ func checkOnline(s *discordgo.Session, event *discordgo.PresenceUpdate) {
 	channelID := "333291751924039681"
 	id := event.User.ID
 	if guildOnlineStates[id] == nil {
-		fmt.Println("cannot find user id:", id)
+		logger.PrintError("cannot find user id:", id)
 		return
 	}
 	defer func() { guildOnlineStates[id].Status = event.Status }()
@@ -33,9 +32,8 @@ func checkOnline(s *discordgo.Session, event *discordgo.PresenceUpdate) {
 }
 
 func welcomeBack(s *discordgo.Session, channelID, name string) {
-	//fmt.Println("おかえり " + name)
-	msg, err := s.ChannelMessageSend(channelID, name+" has become online")
+	_, err := s.ChannelMessageSend(channelID, name+" has become online")
 	if err != nil {
-		fmt.Println(err)
+		logger.PrintError(err)
 	}
 }

@@ -1,7 +1,6 @@
 package slam
 
 import (
-	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
@@ -10,6 +9,7 @@ import (
 	"os"
 
 	"sagiri-bot/event/messagecreate"
+	"sagiri-bot/logger"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/disintegration/gift"
@@ -48,11 +48,11 @@ func Slam(s *discordgo.Session, m *discordgo.MessageCreate) {
 		url := "https://cdn.discordapp.com/avatars/" + user.ID + "/" + user.Avatar + ".png"
 		resp, err := http.Get(url)
 		if err != nil {
-			fmt.Println(err)
+			logger.PrintError(err)
 			return
 		}
 		if resp.StatusCode != http.StatusOK {
-			fmt.Println(resp.Status)
+			logger.PrintError(resp.Status)
 			return
 		}
 		defer resp.Body.Close()
@@ -82,7 +82,7 @@ func Slam(s *discordgo.Session, m *discordgo.MessageCreate) {
 		//      s.ChannelMessageSend(channelID, "Avatar of "+user.Username)
 		s.ChannelMessageSendComplex(m.ChannelID, data)
 		if err != nil {
-			fmt.Println(err)
+			logger.PrintError(err)
 		}
 	}
 }
