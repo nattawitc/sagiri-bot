@@ -2,7 +2,6 @@ package presenceupdate
 
 import (
 	"fmt"
-	"time"
 
 	"sagiri-bot/globalstate"
 
@@ -39,8 +38,4 @@ func welcomeBack(s *discordgo.Session, channelID, name string) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	go func() {
-		time.Sleep(10 * time.Second)
-		s.ChannelMessageDelete(channelID, msg.ID)
-	}()
 }
