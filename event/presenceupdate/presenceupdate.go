@@ -15,7 +15,7 @@ func PresenceUpdate(s *discordgo.Session, event *discordgo.PresenceUpdate) {
 
 func checkOnline(s *discordgo.Session, event *discordgo.PresenceUpdate) {
 	guildOnlineStates := globalstate.MemberStates[event.GuildID]
-	channelID := "164000870298681345"
+	channelID := "333291751924039681"
 	id := event.User.ID
 	if guildOnlineStates[id] == nil {
 		fmt.Println("cannot find user id:", id)
@@ -35,7 +35,7 @@ func checkOnline(s *discordgo.Session, event *discordgo.PresenceUpdate) {
 
 func welcomeBack(s *discordgo.Session, channelID, name string) {
 	//fmt.Println("おかえり " + name)
-	msg, err := s.ChannelMessageSend(channelID, "おかえり "+name)
+	msg, err := s.ChannelMessageSend(channelID, name+" has become online")
 	if err != nil {
 		fmt.Println(err)
 	}
