@@ -55,7 +55,9 @@ func Slam(s *discordgo.Session, m *discordgo.MessageCreate) {
 			s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
 				Content: "I can't get the avatar!!",
 				Embed: &discordgo.MessageEmbed{
-					URL: "https://media.giphy.com/media/l0IyhP3coXnaEi9os/giphy.gif",
+					Image: &discordgo.MessageEmbedImage{
+						URL: "https://media.giphy.com/media/l0IyhP3coXnaEi9os/giphy.gif",
+					},
 				},
 			})
 			logger.PrintError(resp.Status)
