@@ -12,10 +12,19 @@ import (
 	_ "sagiri-bot/event/messagecreate/slam"
 	"sagiri-bot/event/presenceupdate"
 	"sagiri-bot/event/ready"
+	"sagiri-bot/event/voicestateupdate"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/spf13/viper"
 )
+
+func addHandler(dg *discordgo.Session) {
+	dg.AddHandler(ready.Ready)
+	dg.AddHandler(messagecreate.MessageCreate)
+	dg.AddHandler(guildcreate.GuildCreate)
+	dg.AddHandler(presenceupdate.PresenceUpdate)
+	dg.AddHandler(voicestateupdate.VoiceStateUpdate)
+}
 
 func main() {
 	token := viper.GetString("token")
@@ -31,17 +40,8 @@ func main() {
 		return
 	}
 
-	// Register ready as a callback for the ready events.
-	dg.AddHandler(ready.Ready)
-
-	// Register messageCreate as a callback for the messageCreate events.
-	dg.AddHandler(messagecreate.MessageCreate)
-
-	// Register guildCreate as a callback for the guildCreate events.
-	dg.AddHandler(guildcreate.GuildCreate)
-
-	// Register presenceUpdate as a callback for the presenceUpdate events.
-	dg.AddHandler(presenceupdate.PresenceUpdate)
+	// Register callbacks for the events.
+	addHandler(dg)
 
 	// Open the websocket and begin listening.
 	err = dg.Open()
