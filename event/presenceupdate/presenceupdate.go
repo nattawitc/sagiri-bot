@@ -19,21 +19,37 @@ func checkOnline(s *discordgo.Session, event *discordgo.PresenceUpdate) {
 		logger.PrintError("cannot find user id:", id)
 		return
 	}
+	memberState := guildOnlineStates[id]
 	defer func() { guildOnlineStates[id].Status = event.Status }()
-	if guildOnlineStates[id].Status == discordgo.StatusOffline {
-		welcomeBack(s, channelID, guildOnlineStates[id].Name)
-		return
-	}
+	if online(memberState.Status) != online(event.Presence.Status) {
+		if online(event.Presence.Status) {
+			_, err := s.ChannelMessageSend(channelID, memberState.Name+" has become online")
+			if err != nil {
+				logger.PrintError(err)
+			}
 
-	if guildOnlineStates[id].Status == discordgo.StatusInvisible {
-		welcomeBack(s, channelID, guildOnlineStates[id].Name)
-		return
+		} else {
+			_, err := s.ChannelMessageSend(channelID, memberState.Name+" has become offline")
+			if err != nil {
+				logger.PrintError(err)
+			}
+		}
 	}
 }
 
-func welcomeBack(s *discordgo.Session, channelID, name string) {
-	_, err := s.ChannelMessageSend(channelID, name+" has become online")
-	if err != nil {
-		logger.PrintError(err)
+func online(status discordgo.Status) bool {
+	switch status {
+	case discordgo.StatusOnline:
+		return true
+	case discordgo.StatusIdle:
+		return true
+	case discordgo.StatusDoNotDisturb:
+		return true
+	case discordgo.StatusInvisible:
+		return false
+	case discordgo.StatusOffline:
+		return false
+	default:
+		return false
 	}
 }
