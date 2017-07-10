@@ -31,13 +31,9 @@ func GuildCreate(s *discordgo.Session, event *discordgo.GuildCreate) {
 	globalstate.MemberStates[event.ID] = memberState
 
 	// Store Voice State
-	voiceState := make(map[string]*globalstate.MemberVoiceState)
 	for _, voice := range event.VoiceStates {
-		voiceState[voice.UserID] = &globalstate.MemberVoiceState{
-			Name: memberState[voice.UserID].Name,
-			State: &discordgo.VoiceStateUpdate{
-				voice,
-			},
+		memberState[voice.UserID].VoiceState = &discordgo.VoiceStateUpdate{
+			voice,
 		}
 	}
 }

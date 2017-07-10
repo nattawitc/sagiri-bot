@@ -5,21 +5,19 @@ import (
 )
 
 var (
-	MemberStates      map[string]map[string]*MemberState
-	MemberVoiceStates map[string]map[string]*MemberVoiceState
+	MemberStates map[string]map[string]*MemberState
 )
 
 type MemberState struct {
-	Name   string
-	Status discordgo.Status
+	Name       string
+	Status     discordgo.Status
+	VoiceState *discordgo.VoiceStateUpdate
 }
 
 type MemberVoiceState struct {
-	Name  string
-	State *discordgo.VoiceStateUpdate
+	Name string
 }
 
 func init() {
 	MemberStates = make(map[string]map[string]*MemberState)
-	MemberVoiceStates = make(map[string]map[string]*MemberVoiceState)
 }

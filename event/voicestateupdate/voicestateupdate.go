@@ -8,34 +8,47 @@ import (
 )
 
 func VoiceStateUpdate(s *discordgo.Session, event *discordgo.VoiceStateUpdate) {
-	guildOnlineStates := globalstate.MemberVoiceStates[event.GuildID]
+	guildOnlineStates := globalstate.MemberStates[event.GuildID]
 	id := event.UserID
 	if guildOnlineStates[id] == nil {
 		logger.PrintError("cannot find user id:", id)
 		return
 	}
 	memberState := guildOnlineStates[id]
-	defer func() { memberState.State = event }()
-	if memberState.State.ChannelID != event.ChannelID {
+	defer func() { memberState.VoiceState = event }()
+	if memberState.VoiceState == nil {
+		newState(s, event, memberState)
+		return
+	}
+	if memberState.VoiceState.ChannelID != event.ChannelID {
 		moveChan(s, event, memberState)
 	}
-
 }
 
-func moveChan(s *discordgo.Session, event *discordgo.VoiceStateUpdate, memberState *globalstate.MemberVoiceState) {
+func newState(s *discordgo.Session, event *discordgo.VoiceStateUpdate, memberState *globalstate.MemberState) {
 	ch, err := s.Channel(event.ChannelID)
 	if err != nil {
 		logger.PrintError(err)
 		return
 	}
-	if memberState.State.ChannelID == "" {
+
+	sendMessage(s, memberState.Name+" has joined \""+ch.Name+"\" voice channel")
+}
+
+func moveChan(s *discordgo.Session, event *discordgo.VoiceStateUpdate, memberState *globalstate.MemberState) {
+	if event.ChannelID == "" {
+		sendMessage(s, memberState.Name+" has left voice channel")
+		return
+	}
+	ch, err := s.Channel(event.ChannelID)
+	if err != nil {
+		logger.PrintError(err)
+		return
+	}
+	if memberState.VoiceState.ChannelID == "" {
 		sendMessage(s, memberState.Name+" has joined \""+ch.Name+"\" voice channel")
 	} else {
-		if event.ChannelID != "" {
-			sendMessage(s, memberState.Name+" has moved to \""+ch.Name+"\" voice channel")
-		} else {
-			sendMessage(s, memberState.Name+" has left voice channel")
-		}
+		sendMessage(s, memberState.Name+" has moved to \""+ch.Name+"\" voice channel")
 	}
 }
 
