@@ -1,42 +1,16 @@
 package emoji
 
-type Name string
+type Emoji string
 
 const (
-	Zero  Name = "zero"
-	One   Name = "one"
-	Two   Name = "two"
-	Three Name = "three"
-	Four  Name = "four"
-	Five  Name = "five"
-	Six   Name = "six"
-	Seven Name = "seven"
-	Eight Name = "eight"
-	Nine  Name = "nine"
+	Zero  Emoji = "\x30\xE2\x83\xA3" // 0⃣
+	One   Emoji = "\x31\xE2\x83\xA3" // 1⃣
+	Two   Emoji = "\x32\xE2\x83\xA3" // 2⃣
+	Three Emoji = "\x33\xE2\x83\xA3" // 3⃣
+	Four  Emoji = "\x34\xE2\x83\xA3" // 4⃣
+	Five  Emoji = "\x35\xE2\x83\xA3" // 5⃣
+	Six   Emoji = "\x36\xE2\x83\xA3" // 6⃣
+	Seven Emoji = "\x37\xE2\x83\xA3" // 7⃣
+	Eight Emoji = "\x38\xE2\x83\xA3" // 8⃣
+	Nine  Emoji = "\x39\xE2\x83\xA3" // 9⃣
 )
-
-var (
-	GetName map[string]Name
-	GetCode map[Name]string
-)
-
-func init() {
-	GetName = make(map[string]Name)
-	GetCode = make(map[Name]string)
-
-	AddEmoji(Zero, "\x30\xE2\x83\xA3")
-	AddEmoji(One, "\x31\xE2\x83\xA3")
-	AddEmoji(Two, "\x32\xE2\x83\xA3")
-	AddEmoji(Three, "\x33\xE2\x83\xA3")
-	AddEmoji(Four, "\x34\xE2\x83\xA3")
-	AddEmoji(Five, "\x35\xE2\x83\xA3")
-	AddEmoji(Six, "\x36\xE2\x83\xA3")
-	AddEmoji(Seven, "\x37\xE2\x83\xA3")
-	AddEmoji(Eight, "\x38\xE2\x83\xA3")
-	AddEmoji(Nine, "\x39\xE2\x83\xA3")
-}
-
-func AddEmoji(name Name, code string) {
-	GetName[code] = name
-	GetCode[name] = code
-}
