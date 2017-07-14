@@ -11,4 +11,8 @@ const (
 	Seven = "\x37\xE2\x83\xA3" // 7⃣
 	Eight = "\x38\xE2\x83\xA3" // 8⃣
 	Nine  = "\x39\xE2\x83\xA3" // 9⃣
+
+	ArrowLeft              = "\xE2\xAC\x85"
+	ArrowRight             = "\xE2\x9E\xA1"
+	LeftwardsArrowWithHook = "\xE2\x86\xA9"
 )

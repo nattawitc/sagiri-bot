@@ -9,7 +9,9 @@ import (
 	_ "sagiri-bot/config"
 	"sagiri-bot/event/guildcreate"
 	"sagiri-bot/event/messagecreate"
+	_ "sagiri-bot/event/messagecreate/anime"
 	_ "sagiri-bot/event/messagecreate/slam"
+	"sagiri-bot/event/messagereactionadd"
 	"sagiri-bot/event/presenceupdate"
 	"sagiri-bot/event/ready"
 	"sagiri-bot/event/voicestateupdate"
@@ -21,6 +23,7 @@ import (
 func addHandler(dg *discordgo.Session) {
 	dg.AddHandler(ready.Ready)
 	dg.AddHandler(messagecreate.MessageCreate)
+	dg.AddHandler(messagereactionadd.MessageReactionAdd)
 	dg.AddHandler(guildcreate.GuildCreate)
 	dg.AddHandler(presenceupdate.PresenceUpdate)
 	dg.AddHandler(voicestateupdate.VoiceStateUpdate)
