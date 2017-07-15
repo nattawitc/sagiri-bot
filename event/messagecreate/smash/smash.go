@@ -1,4 +1,4 @@
-package slam
+package smash
 
 import (
 	"image"
@@ -22,7 +22,7 @@ var (
 
 func init() {
 	loadTemplate()
-	messagecreate.AddCommand("slam", "slam avatar of user who's mentioned", Slam)
+	messagecreate.AddCommand("smash", "smash avatar of user who's mentioned", Smash)
 }
 
 func loadTemplate() {
@@ -42,7 +42,7 @@ func loadTemplate() {
 	g.Draw(throwTemplate, img)
 }
 
-func Slam(s *discordgo.Session, m *discordgo.MessageCreate) {
+func Smash(s *discordgo.Session, m *discordgo.MessageCreate) {
 	//  filename := "58724194_p02.jpg"
 	for _, user := range m.Mentions {
 		url := "https://cdn.discordapp.com/avatars/" + user.ID + "/" + user.Avatar + ".png"
