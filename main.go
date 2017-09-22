@@ -10,6 +10,7 @@ import (
 	"sagiri-bot/event/guildcreate"
 	"sagiri-bot/event/messagecreate"
 	_ "sagiri-bot/event/messagecreate/anime"
+	_ "sagiri-bot/event/messagecreate/hottodogu"
 	_ "sagiri-bot/event/messagecreate/smash"
 	"sagiri-bot/event/messagereactionadd"
 	"sagiri-bot/event/presenceupdate"
