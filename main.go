@@ -12,6 +12,7 @@ import (
 	_ "sagiri-bot/event/messagecreate/anime"
 	_ "sagiri-bot/event/messagecreate/hottodogu"
 	_ "sagiri-bot/event/messagecreate/smash"
+	_ "sagiri-bot/event/messagecreate/whyhurry"
 	"sagiri-bot/event/messagereactionadd"
 	"sagiri-bot/event/presenceupdate"
 	"sagiri-bot/event/ready"
