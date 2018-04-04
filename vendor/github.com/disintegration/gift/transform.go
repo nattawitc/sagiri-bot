@@ -202,7 +202,7 @@ func (p *rotateFilter) Draw(dst draw.Image, src image.Image, options *Options) {
 	dstxoff := float32(w)/2 - 0.5
 	dstyoff := float32(h)/2 - 0.5
 
-	bgpx := pixelclr(p.bgcolor)
+	bgpx := pixelFromColor(p.bgcolor)
 	asin, acos := sincosf32(p.angle)
 
 	pixGetter := newPixelGetter(src)
@@ -229,8 +229,6 @@ func (p *rotateFilter) Draw(dst draw.Image, src image.Image, options *Options) {
 			}
 		}
 	})
-
-	return
 }
 
 func interpolateCubic(xf, yf float32, bounds image.Rectangle, pixGetter *pixelGetter, bgpx pixel) pixel {
@@ -279,17 +277,17 @@ func interpolateCubic(xf, yf float32, bounds image.Rectangle, pixGetter *pixelGe
 	cfs[15] = k36 * xq * yq * (xq - 1) * (xq + 1) * (yq - 1) * (yq + 1)
 
 	for i := range pxs {
-		wa := pxs[i].A * cfs[i]
-		px.R += pxs[i].R * wa
-		px.G += pxs[i].G * wa
-		px.B += pxs[i].B * wa
-		px.A += wa
+		wa := pxs[i].a * cfs[i]
+		px.r += pxs[i].r * wa
+		px.g += pxs[i].g * wa
+		px.b += pxs[i].b * wa
+		px.a += wa
 	}
 
-	if px.A != 0 {
-		px.R /= px.A
-		px.G /= px.A
-		px.B /= px.A
+	if px.a != 0 {
+		px.r /= px.a
+		px.g /= px.a
+		px.b /= px.a
 	}
 
 	return px
@@ -323,17 +321,17 @@ func interpolateLinear(xf, yf float32, bounds image.Rectangle, pixGetter *pixelG
 	cfs[3] = xq * yq
 
 	for i := range pxs {
-		wa := pxs[i].A * cfs[i]
-		px.R += pxs[i].R * wa
-		px.G += pxs[i].G * wa
-		px.B += pxs[i].B * wa
-		px.A += wa
+		wa := pxs[i].a * cfs[i]
+		px.r += pxs[i].r * wa
+		px.g += pxs[i].g * wa
+		px.b += pxs[i].b * wa
+		px.a += wa
 	}
 
-	if px.A != 0 {
-		px.R /= px.A
-		px.G /= px.A
-		px.B /= px.A
+	if px.a != 0 {
+		px.r /= px.a
+		px.g /= px.a
+		px.b /= px.a
 	}
 
 	return px
