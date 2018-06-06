@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 
 	_ "sagiri-bot/config"
@@ -17,6 +18,7 @@ import (
 	"sagiri-bot/event/presenceupdate"
 	"sagiri-bot/event/ready"
 	"sagiri-bot/event/voicestateupdate"
+	"sagiri-bot/twitter"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/spf13/viper"
@@ -48,6 +50,11 @@ func main() {
 	// Register callbacks for the events.
 	addHandler(dg)
 
+	// Start twitter stream
+	var stop chan int
+	var wg sync.WaitGroup
+	twitter.StartShiftcodeFollower(dg, stop, wg)
+
 	// Open the websocket and begin listening.
 	err = dg.Open()
 	if err != nil {
@@ -61,5 +68,6 @@ func main() {
 	<-sc
 
 	// Cleanly close down the Discord session.
+	wg.Wait()
 	dg.Close()
 }
