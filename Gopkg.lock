@@ -2,6 +2,24 @@
 
 
 [[projects]]
+  name = "github.com/ChimeraCoder/anaconda"
+  packages = ["."]
+  revision = "9c68684170b980d5b4c2ed08fae9b530e659904d"
+  version = "v2.0.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/ChimeraCoder/tokenbucket"
+  packages = ["."]
+  revision = "c5a927568de7aad8a58127d80bcd36ca4e71e454"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/azr/backoff"
+  packages = ["."]
+  revision = "53511d3c733003985b0b76f733df1f4d0095ee6a"
+
+[[projects]]
   name = "github.com/bwmarrin/discordgo"
   packages = ["."]
   revision = "4a33b9bc7c56cfdb9bb244e33e83cb3941fe2bdc"
@@ -14,6 +32,18 @@
   version = "v1.1.2"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/dustin/go-jsonpointer"
+  packages = ["."]
+  revision = "ba0abeacc3dcca5b9b20f31509c46794edbc9965"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/dustin/gojson"
+  packages = ["."]
+  revision = "2e71ec9dd5adce3b168cd0dbde03b5cc04951c30"
+
+[[projects]]
   name = "github.com/fogleman/gg"
   packages = ["."]
   revision = "6166aa3c1afaee416f384645a81636267aee6d25"
@@ -24,6 +54,12 @@
   packages = ["."]
   revision = "c2828203cd70a50dcccfb2761f8b1f8ceef9a8e9"
   version = "v1.4.7"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/garyburd/go-oauth"
+  packages = ["oauth"]
+  revision = "bca2e7f09a178fd36b034107a00e2323bca6a82e"
 
 [[projects]]
   branch = "master"
@@ -131,6 +167,12 @@
 
 [[projects]]
   branch = "master"
+  name = "golang.org/x/net"
+  packages = ["context"]
+  revision = "1e491301e022f8f977054da4c2d852decd59571f"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
   revision = "f67933eaf9e2f750f58a234209a11ebc1107be38"
@@ -157,6 +199,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6ef9d60d507a7b2d596a4797837571c9c4de20538fcca8d473b3e3dc0792b5c7"
+  inputs-digest = "f42452937c148a2bd13e953ed72e43b98a698421fb858a80525b5a9d65f896c5"
   solver-name = "gps-cdcl"
   solver-version = 1
