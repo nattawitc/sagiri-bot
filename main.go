@@ -10,7 +10,8 @@ import (
 	_ "sagiri-bot/config"
 	"sagiri-bot/event/guildcreate"
 	"sagiri-bot/event/messagecreate"
-	_ "sagiri-bot/event/messagecreate/anime"
+
+	//_ "sagiri-bot/event/messagecreate/anime"
 	_ "sagiri-bot/event/messagecreate/hottodogu"
 	_ "sagiri-bot/event/messagecreate/smash"
 	_ "sagiri-bot/event/messagecreate/whyhurry"
@@ -53,7 +54,7 @@ func main() {
 	// Start twitter stream
 	var stop chan int
 	var wg sync.WaitGroup
-	twitter.StartShiftcodeFollower(dg, stop, wg)
+	twitter.StartShiftcodeFollower(dg, stop, &wg)
 
 	// Open the websocket and begin listening.
 	err = dg.Open()

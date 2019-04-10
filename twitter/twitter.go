@@ -32,7 +32,7 @@ func getTwitterApi() *anaconda.TwitterApi {
 	return defaultApi
 }
 
-func StartShiftcodeFollower(s *discordgo.Session, stop <-chan int, wg sync.WaitGroup) {
+func StartShiftcodeFollower(s *discordgo.Session, stop <-chan int, wg *sync.WaitGroup) {
 	api := getTwitterApi()
 
 	go func() {
