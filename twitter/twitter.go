@@ -29,6 +29,7 @@ func getTwitterApi() *anaconda.TwitterApi {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	defaultApi := anaconda.NewTwitterApi(accesstoken, accesstokenSecret)
+	defaultApi.Log = anaconda.BasicLogger
 	return defaultApi
 }
 
